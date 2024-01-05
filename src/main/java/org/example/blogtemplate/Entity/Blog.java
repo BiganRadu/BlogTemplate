@@ -1,34 +1,40 @@
 package org.example.blogtemplate.Entity;
 
 
+import jakarta.persistence.*;
+import org.springframework.boot.autoconfigure.web.WebProperties;
 import org.springframework.stereotype.Component;
 
 import java.net.URI;
 import java.util.Date;
 
-@Component
+@Entity
+@Table(name = "blogs")
 public class Blog {
+    @Id
+    @Column(name="id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
+    @Column(name="title")
     private String title;
-
-    private URI imageHeader;
-
+    @Column(name="image_header")
+    private String imageHeader;
+    @Column(name = "description")
     private String description;
-
+    @Column(name = "text")
     private String text;
-
-    private String userName;
-
+    @Column(name="author_id")
+    private int authorId;
+    @Column(name="date")
     private Date date;
 
 
-    public Blog(String title, URI imageHeader, String text, String description, String userName, Date date) {
+    public Blog(String title, String imageHeader, String text, String description, int authorID, Date date) {
         this.title = title;
         this.imageHeader = imageHeader;
         this.text = text;
         this.description  = description;
-        this.userName = userName;
+        this.authorId = authorId;
         this.date = date;
     }
 
@@ -52,11 +58,11 @@ public class Blog {
         this.title = title;
     }
 
-    public URI getImageHeader() {
+    public String getImageHeader() {
         return imageHeader;
     }
 
-    public void setImageHeader(URI imageHeader) {
+    public void setImageHeader(String imageHeader) {
         this.imageHeader = imageHeader;
     }
 
@@ -76,12 +82,12 @@ public class Blog {
         this.description = description;
     }
 
-    public String getUserName() {
-        return userName;
+    public int getAuthorId() {
+        return this.authorId;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setAuthorId(int authorId) {
+        this.authorId = authorId;
     }
 
     public Date getDate() {
