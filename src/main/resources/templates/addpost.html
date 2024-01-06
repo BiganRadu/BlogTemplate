@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>RADUZEW BLOG</title>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <script src="https://kit.fontawesome.com/30c36676bf.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="head">
+    <nav class="navbar navbar-expand-lg mt-0 p-md-0" id="mainNav">
+        <div class="container-fluid">
+            <a class="navbar-brand ms-4 text-light" href="/">Radu's BLOG</a>
+            <button class="navbar-toggler white fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                MENU<span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-2">
+                    <li class="nav-item">
+                        <a class="nav-link white fw-bold" href="/">HOME</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link white fw-bold" href="/">ABOUT</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link white fw-bold" href="/contact" >CONTACT</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+<form th:action="@{/addpost}" th:object="${blog}" method="post">
+    <label for="title">Blog Title</label>
+    <input type="text" id="title" th:field="*{title}">
+    <label for="description">Description</label>
+    <input type="text" id="description" th:field="*{description}">
+    <label for="image_url">Blog Image URL</label>
+    <input type="text" id="image_url" th:field="*{imageHeader}">
+    <label for="editor">Blog Content</label>
+    <textarea id="editor" th:field="*{text}"></textarea>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+<script src="https://cdn.ckeditor.com/ckeditor5/40.2.0/classic/ckeditor.js"></script>
+<script>
+    ClassicEditor
+        .create( document.querySelector( '#editor' ) )
+        .catch( error => {
+            console.error( error );
+        } );
+</script>
+<script src="https://kit.fontawesome.com/30c36676bf.js" crossorigin="anonymous"></script>
+<script th:src="@{/js/scripts.js}"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</body>
+<footer class="mt-5">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <ul class="list-inline text-center">
+                    <li class="list-inline-item">
+                        <a href="#!">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fas fa-circle fa-stack-2x"></i>
+                                        <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                                    </span>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="#!">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fas fa-circle fa-stack-2x"></i>
+                                        <i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i>
+                                    </span>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="#!">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fas fa-circle fa-stack-2x"></i>
+                                        <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                                    </span>
+                        </a>
+                    </li>
+                </ul>
+                <div class="small text-center text-muted fst-italic">Copyright &copy; Your Website <span id="year"></span></div>
+            </div>
+        </div>
+    </div>
+</footer>
+</html>

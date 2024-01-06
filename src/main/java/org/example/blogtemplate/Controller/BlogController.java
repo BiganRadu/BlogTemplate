@@ -5,9 +5,7 @@ import org.example.blogtemplate.Entity.Blog;
 import org.example.blogtemplate.Service.BlogService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.util.ArrayList;
@@ -49,5 +47,21 @@ public class BlogController {
             return "post";
         }
         return "index";
+    }
+
+    @GetMapping("/contact")
+    public String contact_page(){
+        return "contact";
+    }
+
+    @GetMapping("/addpost")
+    public String add_post_get(Model theModel){
+        theModel.addAttribute("blog",new Blog());
+        return "addpost";
+    }
+
+   @PostMapping("/addpost")
+    public void add_post(@ModelAttribute Blog blog){
+        System.out.println(blog.getText());
     }
 }
