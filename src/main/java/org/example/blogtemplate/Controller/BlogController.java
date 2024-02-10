@@ -21,7 +21,7 @@ public class BlogController {
         this.blogService = blogService;
     }
 
-    @PostConstruct
+  /*  @PostConstruct
     public void init(){
         Blog first = new Blog();
         //first.setAuthor("RaduZEW");
@@ -32,7 +32,7 @@ public class BlogController {
         first.setDate(new Date());
         first.setImageHeader("https://t3.gstatic.com/licensed-image?q=tbn:ANd9GcQi0-LAUlcpsSu4RzEL0hhwzF66bX5QXXWDz3ZuOSFHgolg7Zeej77cElBAhSJ5Xfcw");
         blogService.addBlog(first);
-    }
+    }*/
     @GetMapping("/")
     public String main_page(Model theModel){
         theModel.addAttribute("blogs", blogService.getAllBlogs());
@@ -58,6 +58,11 @@ public class BlogController {
     public String add_post_get(Model theModel){
         theModel.addAttribute("blog",new Blog());
         return "addpost";
+    }
+
+    @GetMapping("/loginform")
+    public String loginPage(){
+        return "login";
     }
 
    @PostMapping("/addpost")
