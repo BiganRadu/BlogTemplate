@@ -40,7 +40,7 @@ public class BlogSecurity {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws  Exception{
-        http.authorizeRequests().requestMatchers("/blog/*").authenticated().requestMatchers("/contact").hasRole("ADMIN").and().formLogin().loginPage("/loginform").defaultSuccessUrl("/",true).loginProcessingUrl("/login").failureUrl("/error").permitAll();
+        http.authorizeRequests().requestMatchers("/blog/*").authenticated().requestMatchers("/contact").hasAuthority("ADMIN").and().formLogin().loginPage("/loginform").defaultSuccessUrl("/",true).loginProcessingUrl("/login").failureUrl("/error").permitAll();
         return http.build();
     }
 

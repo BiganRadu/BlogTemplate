@@ -50,6 +50,11 @@ form{
     margin-left: auto;
     margin-right: auto;
 }
+
+.login-form{
+    width: 100% !important;
+    max-width: 500px !important;
+}
 @media (max-width : 992px){
     .navbar{
         background-color: white !important;

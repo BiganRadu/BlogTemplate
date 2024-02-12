@@ -65,6 +65,11 @@ public class BlogController {
         return "login";
     }
 
+    @GetMapping("/register")
+    public String registerPage(){
+        return "register";
+    }
+
    @PostMapping("/addpost")
     public void add_post(@ModelAttribute Blog blog){
         System.out.println(blog.getText());
