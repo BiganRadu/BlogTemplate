@@ -28,6 +28,11 @@ public class BlogServiceImpl implements BlogService{
     }
 
     @Override
+    public void deleteBlog(int id) {
+        blogDao.deleteById(id);
+    }
+
+    @Override
     public Optional<Blog> getBlogById(int id) {
         return blogDao.findById(id);
     }

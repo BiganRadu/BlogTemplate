@@ -85,4 +85,13 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public boolean hasRole(String role_name){
+        for(Role role : roles){
+            if(role.getName().equals(role_name)){
+                return true;
+            }
+        }
+        return false;
+    }
 }

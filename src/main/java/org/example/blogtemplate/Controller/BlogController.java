@@ -2,7 +2,12 @@ package org.example.blogtemplate.Controller;
 
 import jakarta.annotation.PostConstruct;
 import org.example.blogtemplate.Entity.Blog;
+import org.example.blogtemplate.Entity.User;
 import org.example.blogtemplate.Service.BlogService;
+import org.example.blogtemplate.Service.BlogUserDetails;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -73,5 +78,20 @@ public class BlogController {
    @PostMapping("/addpost")
     public void add_post(@ModelAttribute Blog blog){
         System.out.println(blog.getText());
+    }
+
+    @PostMapping("/delete/{id}")
+    public String deletePost(@PathVariable Integer id){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (!(authentication instanceof AnonymousAuthenticationToken)) {
+            BlogUserDetails userDetails = (BlogUserDetails) authentication.getPrincipal();
+            Optional<Blog> blogOptional = blogService.getBlogById(id);
+            Blog blog  = blogOptional.get();
+           if(userDetails.getUser().hasRole("ADMIN") || userDetails.getUser().getId() == blog.getAuthorId()){
+                System.out.println("Deleted blog with id " + id);
+                blogService.deleteBlog(id);
+            }
+        }
+        return "redirect:/";
     }
 }

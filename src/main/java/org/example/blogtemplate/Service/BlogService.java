@@ -9,5 +9,7 @@ public interface BlogService {
     public List<Blog> getAllBlogs();
     public int addBlog(Blog blog);
 
+    public void deleteBlog(int id);
+
     public Optional<Blog> getBlogById(int id);
 }

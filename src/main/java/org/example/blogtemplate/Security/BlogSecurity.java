@@ -7,11 +7,13 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
+@EnableWebSecurity
 public class BlogSecurity {
 
     private UserRepository userRepository;
@@ -40,7 +42,22 @@ public class BlogSecurity {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws  Exception{
-        http.authorizeRequests().requestMatchers("/blog/*").authenticated().requestMatchers("/contact").hasAuthority("ADMIN").and().formLogin().loginPage("/loginform").defaultSuccessUrl("/",true).loginProcessingUrl("/login").failureUrl("/error").permitAll();
+        http
+                .authorizeRequests()
+                .requestMatchers("/blog/*")
+                    .authenticated()
+                .requestMatchers("/contact")
+                    .hasAuthority("ADMIN")
+                .and()
+                .logout()
+                .logoutSuccessUrl("/")
+                .and()
+                .formLogin()
+                .loginPage("/loginform")
+                .defaultSuccessUrl("/",true)
+                .loginProcessingUrl("/login")
+                .failureUrl("/error")
+                .permitAll();
         return http.build();
     }
 
