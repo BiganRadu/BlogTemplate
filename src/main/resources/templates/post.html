@@ -43,7 +43,7 @@
             <p class="text-white text-center subtitle mt-0" th:text="${blog.description}"></p>
         </div>
         <div class="post">
-            <p class="text-center" th:text="${blog.text}"></p>
+            <p class="text-center" th:utext="${blog.text}"></p>
         </div>
         <script src="https://kit.fontawesome.com/30c36676bf.js" crossorigin="anonymous"></script>
         <script th:src="@{/js/scripts.js}"></script>

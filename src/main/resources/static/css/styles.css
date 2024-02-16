@@ -55,6 +55,10 @@ form{
     width: 100% !important;
     max-width: 500px !important;
 }
+
+#addpost-form > *{
+    display: block;
+}
 @media (max-width : 992px){
     .navbar{
         background-color: white !important;

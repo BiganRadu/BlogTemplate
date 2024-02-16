@@ -54,9 +54,10 @@ public class BlogSecurity {
                 .and()
                 .formLogin()
                 .loginPage("/loginform")
+                .usernameParameter("email")
                 .defaultSuccessUrl("/",true)
                 .loginProcessingUrl("/login")
-                .failureUrl("/error")
+                .failureUrl("/loginform?error")
                 .permitAll();
         return http.build();
     }

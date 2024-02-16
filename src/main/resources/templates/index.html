@@ -46,10 +46,15 @@
             <p class="text-white text-center subtitle mt-0">A collection of Radu's things</p>
         </div>
         <div class="posts">
-            <div class="post" th:each="blog :${blogs}">
+            <div class="post" th:each="blog,iterStat :${blogs}">
                 <a th:href="@{'/blog/' + ${blog.id}}"><p class="posttitle h1 fw-bolder" th:text="${blog.title}"></p></a>
                 <p class="description fw-light h2" th:text="${blog.description}"></p>
-                <p class="postedBy fw-lighter">on <span th:text="${blog.date}"></span></p>
+                <p class="postedBy fw-lighter">Posted on <span th:text="${blog.date}"></span> by <span th:text="${names[__${iterStat.index}__]}"></span></p>
+                <div sec:authorize="isAuthenticated()">
+                    <div th:if="${#authentication.principal.user.id == blog.authorId}">
+                        <a th:href="@{'/editpost/' + ${blog.id}}" class="btn btn-primary">EDIT</a>
+                    </div>
+                </div>
                 <div sec:authorize="isAuthenticated()">
                     <div th:if="${#authentication.principal.user.hasRole('ADMIN') == true or #authentication.principal.user.id == blog.authorId}">
                         <form method="post" th:action="@{'/delete/' + ${blog.id}}">

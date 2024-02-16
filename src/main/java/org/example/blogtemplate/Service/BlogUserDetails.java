@@ -46,15 +46,6 @@ public class BlogUserDetails implements UserDetails {
         return user;
     }
 
-    public boolean hasRole(String role_name){
-        Set<Role> roles = user.getRoles();
-        for(Role role : roles){
-            if(role.getName() == role_name){
-                return true;
-            }
-        }
-        return false;
-    }
     public boolean test(){
         return  true;
     }

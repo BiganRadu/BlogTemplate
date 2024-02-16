@@ -8,8 +8,8 @@
     <script src="https://kit.fontawesome.com/30c36676bf.js" crossorigin="anonymous"></script>
 </head>
 <body>
-<div class="head" style='background-image: url("https://images.unsplash.com/photo-1484100356142-db6ab6244067?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80"); background-size: cover'>
-    <nav class="navbar navbar-expand-lg mt-0 p-md-0">
+<div class="head">
+    <nav class="navbar navbar-expand-lg mt-0 p-md-0" id="mainNav">
         <div class="container-fluid">
             <a class="navbar-brand ms-4 text-light" href="/">Radu's BLOG</a>
             <button class="navbar-toggler white fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -39,25 +39,26 @@
             </div>
         </div>
     </nav>
-    <p class="text-white text-center title fw-bolder">Log In</p>
-    <p class="text-white text-center subtitle mt-0">Welcome back</p>
 </div>
-<div th:if="${param.error}" class="alert alert-danger">
-    Invalid username and password.
-</div>
-<div class="contact-form">
-    <form method="post" th:action="@{/login}" >
-        <div class="form-group">
-            <label for="email">Email</label>
-            <input class="form-control" id="email" name ="email" placeholder="Enter Email">
-        </div>
-        <div class="form-group">
-            <label for="pass">Password</label>
-            <input id="pass" type="password" class="form-control" name ="password">
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
-</div>
+<form th:action="@{'/editpost/' + ${blog.id}}" th:object="${blog}" id="addpost-form" method="post">
+    <label for="title">Blog Title</label>
+    <input type="text" id="title" th:field="*{title}" th:value="${blog.title}">
+    <label for="description">Description</label>
+    <input type="text" id="description" th:field="*{description}" th:value="${blog.description}">
+    <label for="image_url">Blog Image URL</label>
+    <input type="text" id="image_url" th:field="*{imageHeader}" th:value="${blog.description}">
+    <label for="editor">Blog Content</label>
+    <textarea id="editor" th:field="*{text}" th:value="${blog.text}"></textarea>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+<script src="https://cdn.ckeditor.com/ckeditor5/40.2.0/classic/ckeditor.js"></script>
+<script>
+    ClassicEditor
+        .create( document.querySelector( '#editor' ) )
+        .catch( error => {
+            console.error( error );
+        } );
+</script>
 <script src="https://kit.fontawesome.com/30c36676bf.js" crossorigin="anonymous"></script>
 <script th:src="@{/js/scripts.js}"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>

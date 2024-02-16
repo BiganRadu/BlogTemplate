@@ -5,6 +5,7 @@ import org.example.blogtemplate.Entity.Blog;
 import org.example.blogtemplate.Entity.User;
 import org.example.blogtemplate.Service.BlogService;
 import org.example.blogtemplate.Service.BlogUserDetails;
+import org.example.blogtemplate.Service.UserService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
@@ -22,8 +23,11 @@ import java.util.Optional;
 @RequestMapping("/")
 public class BlogController {
     private BlogService blogService;
-    public BlogController(BlogService blogService){
+
+    private UserService userService;
+    public BlogController(BlogService blogService, UserService userService){
         this.blogService = blogService;
+        this.userService = userService;
     }
 
   /*  @PostConstruct
@@ -40,7 +44,18 @@ public class BlogController {
     }*/
     @GetMapping("/")
     public String main_page(Model theModel){
-        theModel.addAttribute("blogs", blogService.getAllBlogs());
+        List<Blog> blogArray = blogService.getAllBlogs();
+        List<String> userNames = new ArrayList<>();
+        for(Blog blog : blogArray){
+            Optional<User> optionalUser = userService.getUserById(blog.getAuthorId());
+            if(optionalUser.isPresent()){
+                userNames.add(optionalUser.get().getUserName());
+            }else{
+                userNames.add("NULL");
+            }
+        }
+        theModel.addAttribute("blogs", blogArray);
+        theModel.addAttribute("names", userNames);
         return "index";
     }
     @GetMapping("/blog/{id}")
@@ -76,8 +91,42 @@ public class BlogController {
     }
 
    @PostMapping("/addpost")
-    public void add_post(@ModelAttribute Blog blog){
-        System.out.println(blog.getText());
+    public String addPost(@ModelAttribute Blog blog){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if(!(authentication instanceof AnonymousAuthenticationToken)) {
+            blog.setDate(new Date());
+            BlogUserDetails userDetails = (BlogUserDetails)authentication.getPrincipal();
+            blog.setAuthorId(userDetails.getUser().getId());
+            blogService.addBlog(blog);
+        }
+        return "redirect:/";
+    }
+
+    @GetMapping("/editpost/{id}")
+    public String editPostGet(Model theModel, @PathVariable Integer id){
+        Optional<Blog> optionalBlog = blogService.getBlogById(id);
+        Blog blog = optionalBlog.get();
+        theModel.addAttribute("blog",blog);
+        return "editpost";
+    }
+
+    @PostMapping("/editpost/{id}")
+    public String editPost(@ModelAttribute Blog blog, @PathVariable Integer id){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if(!(authentication instanceof AnonymousAuthenticationToken)) {
+            BlogUserDetails userDetails = (BlogUserDetails)authentication.getPrincipal();
+            Optional<Blog> blogOptional = blogService.getBlogById(id);
+            Blog existBlog = blogOptional.get();
+            if(userDetails.getUser().getId() == existBlog.getAuthorId()){
+                existBlog.setTitle(blog.getTitle());
+                existBlog.setDescription(blog.getDescription());
+                existBlog.setImageHeader(blog.getImageHeader());
+                existBlog.setText(blog.getText());
+                blogService.addBlog(existBlog);
+                System.out.println("Updated blog with id " + existBlog.getId());
+            }
+        }
+        return "redirect:/";
     }
 
     @PostMapping("/delete/{id}")
