@@ -80,16 +80,6 @@ public class BlogController {
         return "addpost";
     }
 
-    @GetMapping("/loginform")
-    public String loginPage(){
-        return "login";
-    }
-
-    @GetMapping("/register")
-    public String registerPage(){
-        return "register";
-    }
-
    @PostMapping("/addpost")
     public String addPost(@ModelAttribute Blog blog){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
