@@ -50,14 +50,12 @@
                 <a th:href="@{'/blog/' + ${blog.id}}"><p class="posttitle h1 fw-bolder" th:text="${blog.title}"></p></a>
                 <p class="description fw-light h2" th:text="${blog.description}"></p>
                 <p class="postedBy fw-lighter">Posted on <span th:text="${blog.date}"></span> by <span th:text="${names[__${iterStat.index}__]}"></span></p>
-                <div sec:authorize="isAuthenticated()">
-                    <div th:if="${#authentication.principal.user.id == blog.authorId}">
+                <div class="inline">
+                    <div sec:authorize="isAuthenticated()" th:if="${#authentication.principal.user.id == blog.authorId}" >
                         <a th:href="@{'/editpost/' + ${blog.id}}" class="btn btn-primary">EDIT</a>
                     </div>
-                </div>
-                <div sec:authorize="isAuthenticated()">
-                    <div th:if="${#authentication.principal.user.hasRole('ADMIN') == true or #authentication.principal.user.id == blog.authorId}">
-                        <form method="post" th:action="@{'/delete/' + ${blog.id}}">
+                    <div sec:authorize="isAuthenticated()" th:if="${#authentication.principal.user.hasRole('ADMIN') == true or #authentication.principal.user.id == blog.authorId}">
+                        <form method="post" th:action="@{'/delete/' + ${blog.id}}" style="margin-left: 0px !important;">
                             <button type ="submit" class="btn btn-primary">DELETE</button>
                         </form>
                     </div>
@@ -70,38 +68,6 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     </body>
     <footer class="mt-5">
-        <div class="container px-4 px-lg-5">
-            <div class="row gx-4 gx-lg-5 justify-content-center">
-                <div class="col-md-10 col-lg-8 col-xl-7">
-                    <ul class="list-inline text-center">
-                        <li class="list-inline-item">
-                            <a href="#!">
-                                    <span class="fa-stack fa-lg">
-                                        <i class="fas fa-circle fa-stack-2x"></i>
-                                        <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
-                                    </span>
-                            </a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a href="#!">
-                                    <span class="fa-stack fa-lg">
-                                        <i class="fas fa-circle fa-stack-2x"></i>
-                                        <i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i>
-                                    </span>
-                            </a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a href="#!">
-                                    <span class="fa-stack fa-lg">
-                                        <i class="fas fa-circle fa-stack-2x"></i>
-                                        <i class="fab fa-github fa-stack-1x fa-inverse"></i>
-                                    </span>
-                            </a>
-                        </li>
-                    </ul>
-                    <div class="small text-center text-muted fst-italic">Copyright &copy; Your Website <span id="year"></span></div>
-                </div>
-            </div>
-        </div>
+        <div th:replace="footer :: footer"></div>
     </footer>
 </html>

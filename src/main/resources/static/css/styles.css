@@ -59,6 +59,14 @@ form{
 #addpost-form > *{
     display: block;
 }
+
+.inline > *{
+    display: inline-block;
+}
+
+.inline:first-child{
+    margin-left: 0px !important;
+}
 @media (max-width : 992px){
     .navbar{
         background-color: white !important;

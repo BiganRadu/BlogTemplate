@@ -40,7 +40,7 @@
         </div>
     </nav>
 </div>
-<form th:action="@{/addpost}" th:object="${blog}" id="addpost-form" method="post">
+<form th:action="@{/addpost}" th:object="${blog}"  id="addpost-form" method="post">
     <label for="title">Blog Title</label>
     <input type="text" id="title" th:field="*{title}">
     <label for="description">Description</label>
