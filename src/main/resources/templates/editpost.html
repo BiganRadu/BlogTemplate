@@ -8,48 +8,28 @@
     <script src="https://kit.fontawesome.com/30c36676bf.js" crossorigin="anonymous"></script>
 </head>
 <body>
-<div class="head">
-    <nav class="navbar navbar-expand-lg mt-0 p-md-0" id="mainNav">
-        <div class="container-fluid">
-            <a class="navbar-brand ms-4 text-light" href="/">Radu's BLOG</a>
-            <button class="navbar-toggler white fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                MENU<span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-2">
-                    <li class="nav-item">
-                        <a class="nav-link white fw-bold" href="/">HOME</a>
-                    </li>
-                    <li class="nav-item" sec:authorize="isAnonymous()">
-                        <a class="nav-link white fw-bold" href="/register">REGISTER</a>
-                    </li>
-                    <li class="nav-item" sec:authorize="isAnonymous()">
-                        <a class="nav-link white fw-bold" href="/loginform">LOGIN</a>
-                    </li>
-                    <li class="nav-item" sec:authorize="isAuthenticated()">
-                        <a class="nav-link white fw-bold" href="/loginform">Log out</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link white fw-bold" href="/">ABOUT</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link white fw-bold" href="/contact">CONTACT</a>
-                    </li>
-                </ul>
+<div th:replace="navbar :: navbar"></div>
+<header class="masthead" style="background-image: url('../static/assets/img/home-bg.jpg')">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="site-heading">
+                    <h1>EDIT POST</h1>
+                </div>
             </div>
         </div>
-    </nav>
-</div>
-<form th:action="@{'/editpost/' + ${blog.id}}" th:object="${blog}" id="addpost-form" method="post">
-    <label for="title">Blog Title</label>
-    <input type="text" id="title" th:field="*{title}" th:value="${blog.title}">
-    <label for="description">Description</label>
-    <input type="text" id="description" th:field="*{description}" th:value="${blog.description}">
-    <label for="image_url">Blog Image URL</label>
-    <input type="text" id="image_url" th:field="*{imageHeader}" th:value="${blog.description}">
-    <label for="editor">Blog Content</label>
-    <textarea id="editor" th:field="*{text}" th:value="${blog.text}"></textarea>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+</header>
+<form th:action="@{'/editpost/' + ${blog.id}}" th:object="${blog}" class="mt-4" id="addpost-form" method="post">
+    <label for="title" class="mt-2 lead">Blog Title</label>
+    <input type="text" class="form-control mt-1" id="title" th:field="*{title}" th:value="${blog.title}">
+    <label for="description" class="mt-2 lead">Description</label>
+    <input type="text" id="description" class="form-control mt-1" th:field="*{description}" th:value="${blog.description}">
+    <label for="image_url" class="mt-2 lead">Blog Image URL</label>
+    <input type="text" id="image_url" class="form-control mt-1" th:field="*{imageHeader}" th:value="${blog.description}">
+    <label for="editor" class="mt-2 lead">Blog Content</label>
+    <textarea id="editor" th:field="*{text}" class="form-control mt-1" th:value="${blog.text}"></textarea>
+    <button type="submit" class="btn btn-primary mt-3">Submit</button>
 </form>
 <script src="https://cdn.ckeditor.com/ckeditor5/40.2.0/classic/ckeditor.js"></script>
 <script>

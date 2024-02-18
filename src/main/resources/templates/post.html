@@ -8,40 +8,19 @@
         <script src="https://kit.fontawesome.com/30c36676bf.js" crossorigin="anonymous"></script>
     </head>
     <body>
-        <div class="head" th:style="'background-image: url('+${blog.imageHeader}+')'">
-            <nav class="navbar navbar-expand-lg mt-0 p-md-0" id="mainNav">
-                <div class="container-fluid">
-                    <a class="navbar-brand ms-4 text-light" href="/">Radu's BLOG</a>
-                    <button class="navbar-toggler white fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        MENU<span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-2">
-                            <li class="nav-item">
-                                <a class="nav-link white fw-bold" href="/">HOME</a>
-                            </li>
-                            <li class="nav-item" sec:authorize="isAnonymous()">
-                                <a class="nav-link white fw-bold" href="/register">REGISTER</a>
-                            </li>
-                            <li class="nav-item" sec:authorize="isAnonymous()">
-                                <a class="nav-link white fw-bold" href="/loginform">LOGIN</a>
-                            </li>
-                            <li class="nav-item" sec:authorize="isAuthenticated()">
-                                <a class="nav-link white fw-bold" href="/loginform">Log out</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link white fw-bold" href="/">ABOUT</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link white fw-bold" href="/contact">CONTACT</a>
-                            </li>
-                        </ul>
+        <div th:replace="navbar :: navbar"></div>
+        <header class="masthead" th:style="'background-image: url('+${blog.imageHeader}+')'">
+            <div class="container position-relative px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="site-heading">
+                            <h1 th:text="${blog.title}" ></h1>
+                            <span class="subheading" th:text="${blog.description}"></span>
+                        </div>
                     </div>
                 </div>
-            </nav>
-            <p class="text-white text-center title fw-bolder" th:text="${blog.title}"></p>
-            <p class="text-white text-center subtitle mt-0" th:text="${blog.description}"></p>
-        </div>
+            </div>
+        </header>
         <div class="post">
             <p class="text-center" th:utext="${blog.text}"></p>
         </div>

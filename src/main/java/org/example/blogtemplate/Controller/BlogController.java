@@ -1,7 +1,7 @@
 package org.example.blogtemplate.Controller;
 
-import jakarta.annotation.PostConstruct;
 import org.example.blogtemplate.Entity.Blog;
+import org.example.blogtemplate.Entity.Mess;
 import org.example.blogtemplate.Entity.User;
 import org.example.blogtemplate.Service.BlogService;
 import org.example.blogtemplate.Service.BlogUserDetails;
@@ -12,12 +12,12 @@ import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import javax.mail.*;
+import javax.mail.internet.*;
+import javax.mail.Session;
+import javax.mail.Transport;
 
-import java.net.URI;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Controller
 @RequestMapping("/")
@@ -30,18 +30,6 @@ public class BlogController {
         this.userService = userService;
     }
 
-  /*  @PostConstruct
-    public void init(){
-        Blog first = new Blog();
-        //first.setAuthor("RaduZEW");
-        first.setTitle("Primul Articol");
-        first.setDescription("Acesta este primul articol facut cu thymeleaf!");
-        first.setText("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.");
-        first.setAuthorId(5);
-        first.setDate(new Date());
-        first.setImageHeader("https://t3.gstatic.com/licensed-image?q=tbn:ANd9GcQi0-LAUlcpsSu4RzEL0hhwzF66bX5QXXWDz3ZuOSFHgolg7Zeej77cElBAhSJ5Xfcw");
-        blogService.addBlog(first);
-    }*/
     @GetMapping("/")
     public String main_page(Model theModel){
         List<Blog> blogArray = blogService.getAllBlogs();
@@ -70,8 +58,51 @@ public class BlogController {
     }
 
     @GetMapping("/contact")
-    public String contact_page(){
+    public String contactPage(Model theModel){
+        theModel.addAttribute("mess", new Mess());
         return "contact";
+    }
+
+    @PostMapping("/contact")
+    public String contact(@ModelAttribute Mess mess){
+        String recipient = "radubigan5@gmail.com";
+
+        String username = "blogpost49@gmail.com";
+        String password = "jhpb xkyo ueyp eggo";
+
+        Properties props = System.getProperties();
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.port", "587");
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.ssl.protocols", "TLSv1.2");
+        props.put("mail.smtp.starttls.enable", "true");
+
+        Session session = Session.getInstance(props,
+                new javax.mail.Authenticator() {
+                    protected PasswordAuthentication getPasswordAuthentication() {
+                        return new PasswordAuthentication(username, password);
+                    }
+                });
+        try
+        {
+            MimeMessage message = new MimeMessage(session);
+
+            message.setFrom(new InternetAddress(username));
+
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(recipient));
+
+            message.setSubject("BLOG POST CONTACT: " + mess.getSubject());
+
+            message.setText("Username : " + mess.getSender() + "\nUser email : " + mess.getSenderEmail() + "\nContent: \n" + mess.getContent());
+
+            Transport.send(message);
+            System.out.println("Mail successfully sent");
+        }
+        catch (MessagingException mex)
+        {
+            mex.printStackTrace();
+        }
+        return "redirect:/";
     }
 
     @GetMapping("/addpost")

@@ -1,4 +1,4 @@
-*{
+{
     box-sizing: border-box;
     margin: 0px;
     padding: 0px;
@@ -6,14 +6,10 @@
 body{
     overflow-y: scroll;
 }
-.navbar-nav{
-    position: absolute;
-    right: 40px;
-}
 
 .head{
     margin-top: 0px;
-    height: 60vh;
+    height: 70vh;
     background-image: url("../assets/img/home-bg.jpg");
     background-repeat: no-repeat;
     background-size: cover;
@@ -67,30 +63,6 @@ form{
 .inline:first-child{
     margin-left: 0px !important;
 }
-@media (max-width : 992px){
-    .navbar{
-        background-color: white !important;
-    }
-    .navbar-brand{
-        color : black !important;
-    }
-    .navbar-toggler{
-        color: black !important;
-    }
-    .head{
-        padding-top: 0px;
-    }
-    .nav-item{
-        width: 100vw !important;
-        margin-left : 40px;
-    }
-    .navbar-nav{
-        position: static;
-    }
-    .nav-item > a{
-        color :black !important;
-    }
-}
 
 .list-inline {
     padding-left: 0;
@@ -102,4 +74,171 @@ form{
 }
 .list-inline-item:not(:last-child) {
     margin-right: 0.5rem;
+}
+
+.show {
+    z-index: 7;
+}
+
+#mainNav {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1030;
+    border-bottom: 1px solid #dee2e6;
+    background-color: #fff;
+    font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+#mainNav .navbar-brand {
+    font-weight: 800;
+}
+#mainNav .navbar-toggler {
+    font-size: 0.75rem;
+    font-weight: 800;
+    padding: 0.75rem;
+    text-transform: uppercase;
+}
+#mainNav .navbar-nav > li.nav-item > a.nav-link, button.nav-link {
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.0625em;
+    text-transform: uppercase;
+}
+@media (min-width: 992px) {
+    #mainNav {
+        border-bottom: 1px solid transparent;
+        background: transparent;
+    }
+    #mainNav .navbar-brand {
+        color: #fff;
+    }
+    #mainNav .navbar-brand:focus, #mainNav .navbar-brand:hover {
+        color: rgba(255, 255, 255, 0.8);
+    }
+    #mainNav .navbar-nav > li.nav-item > a.nav-link, button.nav-link{
+        color: #fff;
+    }
+    #mainNav .navbar-nav > li.nav-item > a.nav-link:focus, #mainNav .navbar-nav > li.nav-item > a.nav-link:hover, button.nav-link:hover, button.nav-link:focus {
+        color: rgba(255, 255, 255, 0.8);
+    }
+}
+@media (min-width: 992px) {
+    #mainNav {
+        transition: background-color 0.2s;
+        /* Force Hardware Acceleration in WebKit */
+        transform: translate3d(0, 0, 0);
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+    }
+    #mainNav.is-fixed {
+        /* when the user scrolls down, we hide the header right above the viewport */
+        position: fixed;
+        top: -83px;
+        transition: transform 0.2s;
+        border-bottom: 1px solid white;
+        background-color: rgba(255, 255, 255, 0.9);
+    }
+    #mainNav.is-fixed .navbar-brand {
+        color: #212529;
+    }
+    #mainNav.is-fixed .navbar-brand:focus, #mainNav.is-fixed .navbar-brand:hover {
+        color: #0085A1;
+    }
+    #mainNav.is-fixed .navbar-nav > li.nav-item > a, #mainNav.is-fixed .navbar-nav > li.nav-item > form > button {
+        color: #212529;
+    }
+    #mainNav.is-fixed .navbar-nav > li.nav-item > a:focus, #mainNav.is-fixed .navbar-nav > li.nav-item > a:hover,
+    #mainNav.is-fixed .navbar-nav > li.nav-item > form >button:focus ,
+    #mainNav.is-fixed .navbar-nav > li.nav-item > form >button:hover {
+        color: #0085A1;
+    }
+    #mainNav.is-visible {
+        /* if the user changes the scrolling direction, we show the header */
+        transform: translate3d(0, 100%, 0);
+    }
+}
+
+header.masthead {
+    position: relative;
+    margin-bottom: 3rem;
+    padding-top: calc(8rem + 57px);
+    padding-bottom: 8rem;
+    background: no-repeat center center;
+    background-color: #6c757d;
+    background-size: cover;
+    background-attachment: scroll;
+}
+header.masthead:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #212529;
+    opacity: 0.5;
+}
+header.masthead .page-heading,
+header.masthead .post-heading,
+header.masthead .site-heading {
+    color: #fff;
+}
+header.masthead .page-heading,
+header.masthead .site-heading {
+    text-align: center;
+}
+header.masthead .page-heading h1, header.masthead .page-heading .h1,
+header.masthead .site-heading h1,
+header.masthead .site-heading .h1 {
+    font-size: 3rem;
+}
+header.masthead .page-heading .subheading,
+header.masthead .site-heading .subheading {
+    font-size: 1.5rem;
+    font-weight: 300;
+    line-height: 1.1;
+    display: block;
+    margin-top: 0.625rem;
+    font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+header.masthead .post-heading h1, header.masthead .post-heading .h1 {
+    font-size: 2.25rem;
+}
+header.masthead .post-heading .meta,
+header.masthead .post-heading .subheading {
+    line-height: 1.1;
+    display: block;
+}
+header.masthead .post-heading .subheading {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0.75rem 0 2rem;
+    font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+header.masthead .post-heading .meta {
+    font-size: 1.25rem;
+    font-weight: 300;
+    font-style: italic;
+    font-family: "Lora", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+header.masthead .post-heading .meta a {
+    color: #fff;
+}
+@media (min-width: 992px) {
+    header.masthead {
+        padding-top: 12.5rem;
+        padding-bottom: 12.5rem;
+    }
+    header.masthead .page-heading h1, header.masthead .page-heading .h1,
+    header.masthead .site-heading h1,
+    header.masthead .site-heading .h1 {
+        font-size: 5rem;
+    }
+    header.masthead .post-heading h1, header.masthead .post-heading .h1 {
+        font-size: 3.5rem;
+    }
+    header.masthead .post-heading .subheading {
+        font-size: 1.875rem;
+    }
 }

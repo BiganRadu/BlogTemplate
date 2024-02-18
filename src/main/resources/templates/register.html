@@ -7,59 +7,37 @@
     <link rel="stylesheet" th:href="@{/css/styles.css}">
     <script src="https://kit.fontawesome.com/30c36676bf.js" crossorigin="anonymous"></script>
 </head>
-<body>
-<div class="head" style='background-image: url("https://images.unsplash.com/photo-1531592937781-344ad608fabf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80"); background-size: cover'>
-    <nav class="navbar navbar-expand-lg mt-0 p-md-0">
-        <div class="container-fluid">
-            <a class="navbar-brand ms-4 text-light" href="/">Radu's BLOG</a>
-            <button class="navbar-toggler white fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                MENU<span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-2">
-                    <li class="nav-item">
-                        <a class="nav-link white fw-bold" href="/">HOME</a>
-                    </li>
-                    <li class="nav-item" sec:authorize="isAnonymous()">
-                        <a class="nav-link white fw-bold" href="/register">REGISTER</a>
-                    </li>
-                    <li class="nav-item" sec:authorize="isAnonymous()">
-                        <a class="nav-link white fw-bold" href="/loginform">LOGIN</a>
-                    </li>
-                    <li class="nav-item" sec:authorize="isAuthenticated()">
-                        <a class="nav-link white fw-bold" href="/loginform">Log out</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link white fw-bold" href="/">ABOUT</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link white fw-bold" href="/contact">CONTACT</a>
-                    </li>
-                </ul>
+<div th:replace="navbar :: navbar"></div>
+<header class="masthead" style="background-image: url('../static/assets/img/home-bg.jpg')">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="site-heading">
+                    <h1>REGISTER</h1>
+                    <span class="subheading">Start contributing to the blog</span>
+                </div>
             </div>
         </div>
-    </nav>
-    <p class="text-white text-center title fw-bolder">Register</p>
-    <p class="text-white text-center subtitle mt-0">Start contributing to the blog</p>
-</div>
+    </div>
+</header>
 <div th:if="${param.error}" class="alert alert-danger">
     There is already an account with this email.
 </div>
-<div class="contact-form">
+<div class="contact-form mt-4">
     <form th:action= "@{/register}" th:object="${user}" method="POST">
         <div class="form-group">
-            <label for="name">Name</label>
-            <input class="form-control" id="name" name ="username" th:field="*{userName}" placeholder="Enter Name">
+            <label for="name" class="mt-2 lead">Name</label>
+            <input class="form-control mt-1" id="name" name ="username" th:field="*{userName}" placeholder="Enter Name">
         </div>
         <div class="form-group">
-            <label for="email">Email</label>
-            <input class="form-control" id="email" name ="email" th:field="*{email}" placeholder="Enter Email">
+            <label for="email" class="mt-2 lead">Email</label>
+            <input class="form-control mt-1" id="email" name ="email" th:field="*{email}" placeholder="Enter Email">
         </div>
         <div class="form-group">
-            <label for="pass">Password</label>
-            <input id="pass" type="password" class="form-control" th:field="*{password}" name ="password">
+            <label for="pass" class="mt-2 lead">Password</label>
+            <input id="pass" type="password" class="form-control mt-1" th:field="*{password}" name ="password">
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary mt-3">Submit</button>
     </form>
 </div>
 <script src="https://kit.fontawesome.com/30c36676bf.js" crossorigin="anonymous"></script>
