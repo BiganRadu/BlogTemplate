@@ -1,5 +1,6 @@
 package org.example.blogtemplate.Controller;
 
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.annotation.PostConstruct;
 import org.example.blogtemplate.Entity.Blog;
 import org.example.blogtemplate.Entity.Comment;
@@ -19,6 +20,7 @@ import javax.mail.*;
 import javax.mail.internet.*;
 import javax.mail.Session;
 import javax.mail.Transport;
+import javax.swing.text.html.Option;
 
 import java.util.*;
 
@@ -58,10 +60,7 @@ public class BlogController {
         Optional<Blog> blg = blogService.getBlogById(id);
         if(blg.isPresent()){
             theModel.addAttribute("blog",blg.get());
-            for(int i = 0; i < blg.get().getCommentList().size();i++){
-                System.out.println(blg.get().getCommentList().get(i).getUser().getUserName());
-            }
-            System.out.println(blg.get().getCommentList().size());
+            theModel.addAttribute("comm", new Comment());
             return "post";
         }
         return "index";
@@ -175,6 +174,29 @@ public class BlogController {
         return "redirect:/";
     }
 
+    @PostMapping("/addcomment/{id}")
+    public String addComment(@ModelAttribute Comment comment,@PathVariable Integer id){
+        Optional<Blog> blogOptional = blogService.getBlogById(id);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (!(authentication instanceof AnonymousAuthenticationToken) && blogOptional.isPresent()){
+            BlogUserDetails userDetails = (BlogUserDetails) authentication.getPrincipal();
+            comment.setPostId(id);
+            comment.setDate(new Date());
+            System.out.println(userDetails.getUser().getId());
+            comment.setAuthorId(userDetails.getUser().getId());
+            commentService.saveComment(comment);
+        }
+        return "redirect:/blog/" + id;
+    }
+
+    @PostMapping("/delete/{id}")
+    public String deleteComment(@PathVariable Integer id){
+        Optional<Comment> optionalComment = commentService.getCommentById(id);
+        if(optionalComment.isPresent()){
+            commentService.deleteCommentById(id);
+        }
+        return "/blog/" + optionalComment.get().getPostId();
+    }
     @GetMapping("/about")
     public String aboutPage(){
         return "about";

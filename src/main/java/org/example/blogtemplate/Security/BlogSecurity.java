@@ -44,7 +44,7 @@ public class BlogSecurity {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws  Exception{
         http
                 .authorizeRequests()
-                .requestMatchers("/editpost/*","/addpost", "/delete/*")
+                .requestMatchers("/editpost/*","/addpost", "/delete/*", "/addcomment/*", "/deletecomment/*")
                     .authenticated()
                 .and()
                 .logout()

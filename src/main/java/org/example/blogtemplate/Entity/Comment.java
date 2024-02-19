@@ -12,7 +12,8 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name="author_id", insertable = false, updatable = false)
+
+    @Column(name="author_id")
     private int authorId;
 
     @Column(name="post_id")
@@ -24,8 +25,8 @@ public class Comment {
     @Column(name="date")
     private Date date;
 
-    @ManyToOne
-    @JoinColumn(name = "author_id")
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "author_id", referencedColumnName = "id", insertable=false, updatable=false)
     private User user;
     public Comment(int id, int authorId, int postId, String text, Date date) {
         this.id = id;

@@ -16,13 +16,13 @@
 </header>
 <form th:action="@{'/editpost/' + ${blog.id}}" th:object="${blog}" class="mt-4" id="addpost-form" method="post">
     <label for="title" class="mt-2 lead">Blog Title</label>
-    <input type="text" class="form-control mt-1" id="title" th:field="*{title}" th:value="${blog.title}">
+    <input type="text" class="form-control mt-1" id="title" th:field="*{title}" th:value="${blog.title}" required>
     <label for="description" class="mt-2 lead">Description</label>
-    <input type="text" id="description" class="form-control mt-1" th:field="*{description}" th:value="${blog.description}">
+    <input type="text" id="description" class="form-control mt-1" th:field="*{description}" th:value="${blog.description}" required>
     <label for="image_url" class="mt-2 lead">Blog Image URL</label>
-    <input type="text" id="image_url" class="form-control mt-1" th:field="*{imageHeader}" th:value="${blog.description}">
+    <input type="text" id="image_url" class="form-control mt-1" th:field="*{imageHeader}" th:value="${blog.description}" required>
     <label for="editor" class="mt-2 lead">Blog Content</label>
-    <textarea id="editor" th:field="*{text}" class="form-control mt-1" th:value="${blog.text}"></textarea>
+    <textarea id="editor" th:field="*{text}" class="form-control mt-1" th:value="${blog.text}" required></textarea>
     <button type="submit" class="btn btn-primary mt-3">Submit</button>
 </form>
 <script src="https://cdn.ckeditor.com/ckeditor5/40.2.0/classic/ckeditor.js"></script>

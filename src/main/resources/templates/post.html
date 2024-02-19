@@ -19,9 +19,9 @@
             <p class="text-center" th:utext="${blog.text}"></p>
             <hr>
             <div class="comment-section">
-                <form th:action="'/addcomment/' + ${blog.id}" method="post" class="ms-0 h3">
+                <form th:action="'/addcomment/' + ${blog.id}" th:object="${comm}" method="post" class="ms-0 h3">
                     <label for="comm-content">Comment</label>
-                    <textarea id="comm-content" name="comment" class="mt-2 form-control" rows="7"></textarea>
+                    <textarea id="comm-content" name="comment" th:field="*{text}" class="mt-2 form-control" rows="7" required></textarea>
                     <button type="submit" class="btn btn-primary fw-bold mt-2">SUBMIT COMMENT</button>
                 </form>
                 <div class="container" th:each="comment: ${blog.commentList}">
