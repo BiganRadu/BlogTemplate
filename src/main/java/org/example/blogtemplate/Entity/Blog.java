@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 import java.net.URI;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "blogs")
@@ -27,6 +28,10 @@ public class Blog {
     private int authorId;
     @Column(name="date")
     private Date date;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "post_id")
+    private List<Comment> commentList;
 
 
     public Blog(String title, String imageHeader, String text, String description, int authorID, Date date) {
@@ -96,5 +101,14 @@ public class Blog {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+
+    public List<Comment> getCommentList() {
+        return commentList;
+    }
+
+    public void setCommentList(List<Comment> commentList) {
+        this.commentList = commentList;
     }
 }

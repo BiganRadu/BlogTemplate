@@ -1,10 +1,13 @@
 package org.example.blogtemplate.Controller;
 
+import jakarta.annotation.PostConstruct;
 import org.example.blogtemplate.Entity.Blog;
+import org.example.blogtemplate.Entity.Comment;
 import org.example.blogtemplate.Entity.Mess;
 import org.example.blogtemplate.Entity.User;
 import org.example.blogtemplate.Service.BlogService;
 import org.example.blogtemplate.Service.BlogUserDetails;
+import org.example.blogtemplate.Service.CommentService;
 import org.example.blogtemplate.Service.UserService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -25,10 +28,14 @@ public class BlogController {
     private BlogService blogService;
 
     private UserService userService;
-    public BlogController(BlogService blogService, UserService userService){
+
+    private CommentService commentService;
+    public BlogController(BlogService blogService, UserService userService, CommentService commentService){
         this.blogService = blogService;
         this.userService = userService;
+        this.commentService = commentService;
     }
+
 
     @GetMapping("/")
     public String main_page(Model theModel){
@@ -51,7 +58,10 @@ public class BlogController {
         Optional<Blog> blg = blogService.getBlogById(id);
         if(blg.isPresent()){
             theModel.addAttribute("blog",blg.get());
-            System.out.println(blg.get().getTitle());
+            for(int i = 0; i < blg.get().getCommentList().size();i++){
+                System.out.println(blg.get().getCommentList().get(i).getUser().getUserName());
+            }
+            System.out.println(blg.get().getCommentList().size());
             return "post";
         }
         return "index";

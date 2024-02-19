@@ -80,6 +80,36 @@ form{
     z-index: 7;
 }
 
+.comment-section {
+    margin-left: 0px !important;
+    display: block;
+}
+.comment-section  > form > *{
+    display: block;
+}
+.comment-section > form {
+    width: 100%;
+}
+.comment-section > form > textarea {
+    width: 100%;
+    border-width: 3px;
+}
+
+.avatar {
+    width: 60px;
+}
+#deletecomm{
+    margin-left: 0px;
+    border: 0;
+    padding-left: 0px;
+    background: none;
+    padding-top:0px;
+}
+
+#deletecomm:hover, #deletecomm:focus{
+    color: #0085A1;
+}
+
 #mainNav {
     position: absolute;
     top: 0;

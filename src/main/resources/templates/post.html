@@ -17,6 +17,48 @@
         </header>
         <div class="post">
             <p class="text-center" th:utext="${blog.text}"></p>
+            <hr>
+            <div class="comment-section">
+                <form th:action="'/addcomment/' + ${blog.id}" method="post" class="ms-0 h3">
+                    <label for="comm-content">Comment</label>
+                    <textarea id="comm-content" name="comment" class="mt-2 form-control" rows="7"></textarea>
+                    <button type="submit" class="btn btn-primary fw-bold mt-2">SUBMIT COMMENT</button>
+                </form>
+                <div class="container" th:each="comment: ${blog.commentList}">
+                    <div class="row">
+                        <div class="col-md-1">
+                            <img th:src="@{/assets/img/avatar.png}" class="avatar">
+                        </div>
+                        <div class="col-md-11">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <span class="fw-bold" th:text="${comment.user.userName}"></span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <span th:text="${comment.date.toGMTString()}"></span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <span th:text="${comment.text}" style="word-break: break-word"></span>
+                                    </div>
+                                </div>
+                                <div class="row" sec:authorize="isAuthenticated()" th:if="${#authentication.principal.user.hasRole('ADMIN') == true or #authentication.principal.user.id == blog.authorId}">
+                                    <div class="col-md-12">
+                                        <form method="post" th:action="@{'/deletecomment/' + ${comment.id}}" style="margin-left: 0px !important;">
+                                            <button id="deletecomm" type ="submit" style="background: none; border: none;">Delete</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </div>
         <script src="https://kit.fontawesome.com/30c36676bf.js" crossorigin="anonymous"></script>
         <script th:src="@{/js/scripts.js}"></script>
