@@ -76,8 +76,8 @@ public class BlogController {
     public String contact(@ModelAttribute Mess mess){
         String recipient = "radubigan5@gmail.com";
 
-        String username = "blogpost49@gmail.com";
-        String password = "jhpb xkyo ueyp eggo";
+        String username = "example@gmail.com";
+        String password = "passwordExample";
 
         Properties props = System.getProperties();
         props.put("mail.smtp.host", "smtp.gmail.com");
