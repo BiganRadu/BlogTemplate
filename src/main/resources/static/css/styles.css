@@ -7,30 +7,8 @@ body{
     overflow-y: scroll;
 }
 
-.head{
-    margin-top: 0px;
-    height: 70vh;
-    background-image: url("../assets/img/home-bg.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
-    padding: 0px;
-    padding-top: 20px;
-}
 .white{
     color: white !important;
-}
-.title{
-    width: 100%;
-    position: absolute;
-    top:120px;
-    font-size: 90px;
-}
-
-.subtitle{
-    font-size: 30px;
-    position: absolute;
-    top:250px;
-    width: 100%;
 }
 .post{
     min-width: 300px;
@@ -74,10 +52,6 @@ form{
 }
 .list-inline-item:not(:last-child) {
     margin-right: 0.5rem;
-}
-
-.show {
-    z-index: 7;
 }
 
 .comment-section {

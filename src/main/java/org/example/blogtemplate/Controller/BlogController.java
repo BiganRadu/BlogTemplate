@@ -189,13 +189,17 @@ public class BlogController {
         return "redirect:/blog/" + id;
     }
 
-    @PostMapping("/delete/{id}")
+    @PostMapping("/deletecomment/{id}")
     public String deleteComment(@PathVariable Integer id){
         Optional<Comment> optionalComment = commentService.getCommentById(id);
-        if(optionalComment.isPresent()){
-            commentService.deleteCommentById(id);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if( !(authentication instanceof AnonymousAuthenticationToken) && optionalComment.isPresent()){
+            BlogUserDetails userDetails = (BlogUserDetails) authentication.getPrincipal();
+            if(userDetails.getUser().hasRole("ADMIN") || userDetails.getUser().getId() == optionalComment.get().getAuthorId()){
+                commentService.deleteCommentById(id);
+            }
         }
-        return "/blog/" + optionalComment.get().getPostId();
+        return "redirect:/blog/" + optionalComment.get().getPostId();
     }
     @GetMapping("/about")
     public String aboutPage(){
