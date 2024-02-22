@@ -24,8 +24,8 @@ The application is powered by a MySQL database, providing robust and scalable st
 
 ## Preview
 
-![Main Page Preview](https://prnt.sc/42OGPWO--Yko) <!-- Insert screenshot of main page here -->
-![Login Page Preview](https://prnt.sc/8TRzxdFX6hQ2) <!-- Insert screenshot of login page here -->
+![Main Page Preview](https://github.com/BiganRadu/BlogTemplate/blob/master/mainpage.jpg?raw=true) <!-- Insert screenshot of main page here -->
+![Login Page Preview](https://github.com/BiganRadu/BlogTemplate/blob/master/login.jpg?raw=true) <!-- Insert screenshot of login page here -->
 <!-- Add more screenshots as needed -->
 
 ## Live Demo
