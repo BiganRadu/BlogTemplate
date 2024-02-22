@@ -24,13 +24,15 @@ The application is powered by a MySQL database, providing robust and scalable st
 
 ## Preview
 
-![Main Page Preview](https://prnt.sc/42OGPWO--Yko) <!-- Insert screenshot of main page here -->
+![https://prnt.sc/42OGPWO--Yko](https://prnt.sc/42OGPWO--Yko) <!-- Insert screenshot of main page here -->
 ![Login Page Preview](https://prnt.sc/8TRzxdFX6hQ2) <!-- Insert screenshot of login page here -->
 <!-- Add more screenshots as needed -->
 
 ## Live Demo
 
-The application is deployed as a Docker container on Microsoft Azure. You can access the live demo for testing purposes at [insert_live_demo_link_here](http://blogtemplate.ffaefgc0fsccbthu.germanywestcentral.azurecontainer.io/).If you want to use an admin account for testing, you can use an account with the following credentials : email - test@gmail.com password - test .
+The application is deployed as a Docker container on Microsoft Azure. You can access the live demo for testing purposes at [http://blogtemplate.ffaefgc0fsccbthu.germanywestcentral.azurecontainer.io/](http://blogtemplate.ffaefgc0fsccbthu.germanywestcentral.azurecontainer.io/). If you want to use an admin account for testing, you can use an account with the following credentials : 
+email : test@gmail.com 
+password : test 
 
 ## Getting Started
 
