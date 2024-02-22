@@ -16,14 +16,14 @@
 </header>
 <form th:action="@{/addpost}" th:object="${blog}"  id="addpost-form" method="post">
     <label for="title" class="mt-2 lead">Blog Title</label>
-    <input type="text" id="title" th:field="*{title}" class="mt-1" required>
+    <input type="text" id="title" th:field="*{title}" class="mt-1 form-control" required>
     <label for="description" class="mt-2 lead">Description</label>
-    <input type="text" id="description" th:field="*{description}" class="mt-1" required>
+    <input type="text" id="description" th:field="*{description}" class="mt-1 form-control" required>
     <label for="image_url" class="mt-2 lead">Blog Image URL</label>
-    <input type="text" id="image_url" th:field="*{imageHeader}" class="mt-1" required>
+    <input type="text" id="image_url" th:field="*{imageHeader}" class="mt-1 form-control" required>
     <label for="editor" class="mt-2 lead">Blog Content</label>
-    <textarea id="editor" th:field="*{text}" class="mt-1" required></textarea>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <textarea id="editor" th:field="*{text}" class="mt-1" ></textarea>
+    <button type="submit" class="btn btn-primary mt-2">Submit</button>
 </form>
 <script src="https://cdn.ckeditor.com/ckeditor5/40.2.0/classic/ckeditor.js"></script>
 <script>
